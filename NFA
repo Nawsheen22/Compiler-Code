@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+void main() {
+    char state = 0;
+    char input[30];
+    char A = 0, B = 1, C = 2;
+    int length;
+
+    printf("Enter the string: ");
+    scanf("%s", input);
+
+    length = strlen(input);
+
+    for (int i = 0; i < length; i++) {
+        if (state == A && input[i] == '1' )
+            state = A;
+        else if (state == A && input[i] == '0')
+            state = B;
+        else if (state == B && input[i] == '0')
+            state = C;
+
+        else if (state == C && (input[i] == '0' || input[i]=='1'))
+            state = C;
+        else {
+            state = 0;
+            break;
+        }
+    }
+
+    if (state == C) {
+        printf("Accepted\n");
+    } else {
+        printf("Not Accepted\n");
+    }
+
+    return;
+}
