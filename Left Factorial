@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s1, s2, common = "";
+    cin >> s1 >> s2;
+
+    // Find the length of the smaller string without using library functions
+    int len1 = 0, len2 = 0;
+    while (s1[len1] != '\0') len1++;
+    while (s2[len2] != '\0') len2++;
+
+    int min_len = (len1 < len2) ? len1 : len2;
+
+    // Find the common prefix
+    int i;
+    for (i = 0; i < min_len; i++) {
+        if (s1[i] == s2[i]) {
+            common += s1[i];
+        } else {
+            break;
+        }
+    }
+
+    // Print the left-factored result
+    cout << "E->" << common << "F\n";
+
+    // Print remaining parts of both strings
+    cout << "F->";
+    if (i < len1) {
+        for (int j = i; j < len1; j++) cout << s1[j];
+    } else {
+        cout << "ε";  // Use ε for empty string
+    }
+
+    cout << "|";
+
+    if (i < len2) {
+        for (int j = i; j < len2; j++) cout << s2[j];
+    } else {
+        cout << "ε";
+    }
+
+    cout << endl;
+    return 0;
+}
