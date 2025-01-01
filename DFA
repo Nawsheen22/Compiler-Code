@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<string.h>
+
+
+int main(){
+
+  char jp[100];
+  printf("Enter your String:");
+  scanf("%s",jp);
+  int length= strlen(jp);
+  char state=0;
+  char a,b,c;
+  for (int i=0;i<length;i++)
+  {
+      if(state==a && jp[i]=='0')
+      {
+          state=a;
+       }
+
+      else if(state==a && jp[i]=='1')
+      {
+          state=b;
+       }
+        else if(state==b && jp[i]=='1')
+      {
+          state=a;
+       }
+
+        else if(state==a && jp[i]=='1')
+      {
+          state=b;
+       }
+        else if(state==b && jp[i]=='0')
+      {
+          state=c;
+       }
+        else if(state==c && jp[i]=='1')
+      {
+          state=c;
+       }
+        else if(state==c && jp[i]=='0')
+      {
+          state=b;
+       }
+        else if(state==b && jp[i]=='0')
+      {
+          state=c;
+       }
+       else {state=0;}
+
+
+
+
+
+  }
+
+  if (state==c)
+    printf("Accepted\n");
+  else
+    printf("Not Accepted\n");
+
+  return 0;
+} 
