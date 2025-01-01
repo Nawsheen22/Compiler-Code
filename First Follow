@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+vector<string> prod[26];
+set<char> first[26]; // 0 - 26
+bool visited[26];
+
+void compute_first(int nt) {    //nt= Non terminal
+    if (visited[nt])
+        return;
+    visited[nt] = true;
+
+    for (string rhs : prod[nt]) {
+        for (char c : rhs) {
+            if (islower(c) || !isalpha(c)) {
+
+                first[nt].insert(c); break;
+            } else {
+                compute_first(c - 'A');
+                first[nt].insert(first[c - 'A'].begin(), first[c - 'A'].end()); break;
+            }
+        }
+    }
+}
+
+int main() {
+    int n; cin >> n;
+    while (n--) {
+        string input; cin >> input;
+        prod[input[0] - 'A'].push_back(input.substr(3));
+    }
+    for (int i = 0; i < 26; i++)
+     if (!prod[i].empty())
+        compute_first(i);
+    for (int i = 0; i < 26; i++)
+    if (!prod[i].empty())
+    {
+        cout << "FIRST(" << char(i + 'A') << ")={";
+        for (char c : first[i]) cout << c << " ";
+        cout << "}\n";
+    }
+    return 0;
+}
