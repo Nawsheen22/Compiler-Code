@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char identifier[100];
+
+    printf("Enter an identifier: ");
+    scanf("%s", identifier);
+
+
+    if (identifier[0] >= '0' && identifier[0] <= '9')  {
+        printf("'%s' is not a valid identifier.\n", identifier);
+        return 0;
+    }
+
+    for (int i = 1; i < strlen(identifier); i++) {
+
+        if (!((identifier[i] >= '0' && identifier[i] <= '9') || (identifier[i] >= 'a' && identifier[i] <= 'z') || (identifier[i] >= 'A' && identifier[i] <= 'Z'))) {
+            printf("'%s' is not a valid identifier.\n", identifier);
+            return 0;
+        }
+    }
+
+    printf("'%s' is a valid identifier.\n", identifier);
+
+    return 0;
+}
